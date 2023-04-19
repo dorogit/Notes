@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
 const NotesContext = React.createContext()
 
-export const NotesProvider = ( {children} ) => {
-    const [Notes, setNotes] = useState([{title:"hi",content:"hello"}, {title:"hi2",content:"hello2"}])
+const notesReducer =  (state, action) => {
+    switch (action.type) {
+        case "ADD_NOTE":
+            return [...state, {title:`post #${state.length + 1}`, description:"desc"}]
+        default:
+            return state
+    }
+}
 
-    const addNotes = (title, description) => {
-        setNotes([...Notes, {title:title, description:description}])
+export const NotesProvider = ( {children} ) => {
+    const [Notes, dispatch] = useReducer(notesReducer, [{title:"balls", description:"balls2"}])
+
+    const addNotes = () => {
+        dispatch({type:"ADD_NOTE"})
     }
     
     return (
