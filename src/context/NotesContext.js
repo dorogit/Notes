@@ -1,5 +1,6 @@
-import React from "react";
-import createDataContext from "./createDataContext";
+import React, { useReducer } from "react";
+
+const NotesContext = React.createContext()
 
 const notesReducer =  (state, action) => {
     switch (action.type) {
@@ -11,15 +12,17 @@ const notesReducer =  (state, action) => {
 }
 
 export const NotesProvider = ( {children} ) => {
-    const [Notes, dispatch] = useReducer(notesReducer, [{title:"balls", description:"balls2"}])
+    const [Notes, dispatch] = useReducer(notesReducer, [{title:"balls", description:"balls2", id: Math.floor(Math.random() * 99999)}])
 
     const addNotes = () => {
         dispatch({type:"ADD_NOTE"})
     }
+    
+    return (
+        <NotesContext.Provider value = {{Notes, addNotes}} >
+            {children}
+        </NotesContext.Provider>
+    )
 }
 
-export const {Context, Provider} = createDataContext(
-    notesReducer,
-    {addNotes},
-    []
-)
+export default NotesContext;
