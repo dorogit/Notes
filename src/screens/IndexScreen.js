@@ -1,17 +1,17 @@
 import React, {useContext, useState} from "react";
 import { View,Text,Button, TextInput } from "react-native"
-import NotesContext from "../context/NotesContext";
+import { Context } from "../context/NotesContext";
 import { FlatList } from "react-native-gesture-handler";
 
 const IndexScreen = () => {
-    const value = useContext(NotesContext)
+    const value = useContext(Context)
     return (
         <View>
             <Text>
                 HomeScreen
             </Text>
             <FlatList
-                data={value.Notes}
+                data={value.state}
                 renderItem={({item}) => <Text>{item.title} is the title, {item.description} is content</Text>}
                 keyExtractor={(item) => item.title}
             />
