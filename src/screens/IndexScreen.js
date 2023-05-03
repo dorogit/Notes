@@ -3,9 +3,10 @@ import { View,Text,Button, StyleSheet } from "react-native"
 import { Context } from "../context/NotesContext";
 import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
+import { TouchableOpacity } from 'react-native';
 
-const IndexScreen = () => {
-    const {state, addNotes} = useContext(Context)
+const IndexScreen = (props) => {
+    const {state, addNotes, deleteNote} = useContext(Context)
     return (
         <View>
             <Button title = "add note" onPress={() => addNotes()} />
@@ -13,8 +14,12 @@ const IndexScreen = () => {
                 data={state}
                 renderItem={({item}) => (
                     <View style = {styles.view}>
-                        <Text style={styles.title}>ID:{item.id} {item.title} is the title, {item.description} is the desc </Text>
-                        <Feather style={styles.icon} name="trash" />
+                        <TouchableOpacity onPress={()=> props.navigation.navigate("Note")}>
+                            <Text style={styles.title}>ID:{item.id} {item.title} is the title, {item.description} is the desc </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=> {deleteNote(item.id)}} >
+                            <Feather style={styles.icon} name="trash" />
+                        </TouchableOpacity>
                     </View>
                 )}
                 keyExtractor={(item) => item.id}
