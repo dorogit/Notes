@@ -9,6 +9,8 @@ const notesReducer =  (state, action) => {
         
         case "DELETE_NOTE":
             return state.filter((Note)=> Note.id !== action.payload)
+        case "FETCH_POST":
+            return state.filter((Note) => Note.id == action.payload)
         default:
             return state
     }
@@ -26,8 +28,14 @@ const deleteNote = (dispatch) => {
     }
 }
 
+const fetchNote = (dispatch) => {
+    return (id) => {
+        dispatch({type:"FETCH_POST", payload:id})
+    }
+}
+
 export const {Context, Provider} = createNotesContext(
     notesReducer,
-    {addNotes, deleteNote},
+    {addNotes, deleteNote, fetchNote },
     []
 )

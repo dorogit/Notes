@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from './src/context/NotesContext';
 import IndexScreen from './src/screens/IndexScreen';
-import ShowScreen from './src/screens/ShowScreen';
+import NoteScreen from './src/screens/NoteScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -11,7 +11,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={IndexScreen} />
-        <Stack.Screen name="Note" component={ShowScreen} />
+        <Stack.Screen name="Note" component={NoteScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

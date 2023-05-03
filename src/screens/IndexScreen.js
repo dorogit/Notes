@@ -5,7 +5,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native';
 
-const IndexScreen = (props) => {
+const IndexScreen = ({ navigation }) => {
     const {state, addNotes, deleteNote} = useContext(Context)
     return (
         <View>
@@ -14,7 +14,7 @@ const IndexScreen = (props) => {
                 data={state}
                 renderItem={({item}) => (
                     <View style = {styles.view}>
-                        <TouchableOpacity onPress={()=> props.navigation.navigate("Note")}>
+                        <TouchableOpacity onPress={()=> navigation.navigate("Note",{ id: item.id })}>
                             <Text style={styles.title}>ID:{item.id} {item.title} is the title, {item.description} is the desc </Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=> {deleteNote(item.id)}} >
