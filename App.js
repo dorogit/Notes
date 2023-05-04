@@ -4,6 +4,7 @@ import { Provider } from './src/context/NotesContext';
 import IndexScreen from './src/screens/IndexScreen';
 import NoteScreen from './src/screens/NoteScreen';
 import CreateScreen from './src/screens/CreateScreen';
+import EditScreen from './src/screens/EditScreen';
 
 const Stack = createNativeStackNavigator()
 
@@ -14,6 +15,7 @@ const App = () => {
         <Stack.Screen name="Home" component={IndexScreen} />
         <Stack.Screen name="Note" component={NoteScreen} />
         <Stack.Screen name="Create" component={CreateScreen} />
+        <Stack.Screen name="Edit" component={EditScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

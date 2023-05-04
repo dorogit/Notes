@@ -9,7 +9,7 @@ const IndexScreen = ({ navigation }) => {
     
     navigation.setOptions({
         headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Edit")}>
               <Feather style={styles.plusIcon} name="plus" />
             </TouchableOpacity>
           )

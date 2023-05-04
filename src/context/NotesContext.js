@@ -29,5 +29,5 @@ const deleteNote = (dispatch) => {
 export const {Context, Provider} = createNotesContext(
     notesReducer,
     {addNote, deleteNote },
-    []
+    [{title:"This is a dummy title", description:"this is a dummy descrption", id:10000}]
 )
