@@ -5,20 +5,18 @@ import createNotesContext from "./createNotesContext";
 const notesReducer =  (state, action) => {
     switch (action.type) {
         case "ADD_NOTE":
-            return [...state, {title:`post #${state.length + 1}`, description:"desc",id : Math.floor(Math.random()*99999)}]
+            return [...state, {title: action.payload.title, description: action.payload.desc,id : Math.floor(Math.random()*99999)}]
         
         case "DELETE_NOTE":
             return state.filter((Note)=> Note.id !== action.payload)
-        case "FETCH_POST":
-            return state.filter((Note) => Note.id == action.payload)
         default:
             return state
     }
 }
 
-const addNotes = (dispatch) => {
-    return () => {
-        dispatch({type:"ADD_NOTE"})
+const addNote = (dispatch) => {
+    return (title, desc) => {
+        dispatch({type:"ADD_NOTE",payload: {title: title, desc: desc}})
     }
 }
 
@@ -28,14 +26,8 @@ const deleteNote = (dispatch) => {
     }
 }
 
-const fetchNote = (dispatch) => {
-    return (id) => {
-        dispatch({type:"FETCH_POST", payload:id})
-    }
-}
-
 export const {Context, Provider} = createNotesContext(
     notesReducer,
-    {addNotes, deleteNote, fetchNote },
+    {addNote, deleteNote },
     []
 )

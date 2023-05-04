@@ -6,10 +6,19 @@ import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native';
 
 const IndexScreen = ({ navigation }) => {
-    const {state, addNotes, deleteNote} = useContext(Context)
+    
+    navigation.setOptions({
+        headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+              <Feather style={styles.plusIcon} name="plus" />
+            </TouchableOpacity>
+          )
+    })
+
+    const {state, deleteNote} = useContext(Context)
+    
     return (
         <View>
-            <Button title = "add note" onPress={() => addNotes()} />
             <FlatList
                 data={state}
                 renderItem={({item}) => (
@@ -18,7 +27,7 @@ const IndexScreen = ({ navigation }) => {
                             <Text style={styles.title}>ID:{item.id} {item.title} is the title, {item.description} is the desc </Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=> {deleteNote(item.id)}} >
-                            <Feather style={styles.icon} name="trash" />
+                            <Feather style={styles.trashIcon} name="trash" />
                         </TouchableOpacity>
                     </View>
                 )}
@@ -27,8 +36,6 @@ const IndexScreen = ({ navigation }) => {
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     view:{
@@ -43,9 +50,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize:18
     },
-    icon: {
+    trashIcon: {
+        fontSize:24
+    },
+    plusIcon: {
         fontSize:24
     }
+
 })
 
 export default IndexScreen;

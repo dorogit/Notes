@@ -3,26 +3,16 @@ import { View, StyleSheet, Text } from "react-native";
 import { Context } from "../context/NotesContext";
 
 const NoteScreen = ({ route }) => {
-  const { id } = route.params;
-  const { fetchNote } = useContext(Context);
-  const [note, setNote] = useState(null);
 
-  useEffect(() => {
-    const fetchedNote = fetchNote(id);
-    setNote(fetchedNote);
-  }, []);
+  const { state } = useContext(Context)
+  const { id } = route.params
 
-  if (!note) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
+  const Note = state.find((note) => note.id == id)
 
   return (
     <View>
-      <Text>{note.description}</Text>
+      <Text>Title is :{Note.title}</Text>
+      <Text>Description is: {Note.description}</Text>
     </View>
   );
 };
