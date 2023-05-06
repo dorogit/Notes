@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text,TextInput,StyleSheet,Button } from "react-native";
 import { useState } from "react";
 
-const NotesForm = ( { handleSubmit } ) =>{
+const NotesForm = ( { handleSubmit, initialValues } ) =>{
     const [title, setTitle] = useState(initialValues.title)
     const [desc,setDesc] = useState(initialValues.desc)
 

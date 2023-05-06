@@ -4,13 +4,9 @@ import { Context } from "../context/NotesContext";
 
 const EditScreen = ({ route,navigation }) => {
     const { id } = route.params
-    const { state } = useContext(Context)
-
+    const { editNote } = useContext(Context)
     const handleSubmit = (title, desc) => {
-        const Note = state.find((note) => note.id == id)
-        Note.description = desc
-        Note.title = title
-        navigation.navigate('Home')
+        editNote(id, title, desc,() => navigation.navigate('Home'))
     }
    
     return (

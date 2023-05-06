@@ -9,6 +9,10 @@ const notesReducer =  (state, action) => {
         
         case "DELETE_NOTE":
             return state.filter((Note)=> Note.id !== action.payload)
+        case "EDIT_NOTE":
+            return state.map((note)=> {
+                return note.id === action.payload.id ? action.payload: note
+            })
         default:
             return state
     }
@@ -17,7 +21,6 @@ const notesReducer =  (state, action) => {
 const addNote = (dispatch) => {
     return (title, desc,callback) => {
         dispatch({type:"ADD_NOTE",payload: {title: title, desc: desc}})
-        console.log("called",callback)
         callback()
     }
 }
@@ -28,8 +31,15 @@ const deleteNote = (dispatch) => {
     }
 }
 
+const editNote = (dispatch) => {
+    return (id, title, desc, callback) => {
+        dispatch({type:"EDIT_NOTE", payload:{title:title, description:desc, id:id}})
+        callback()
+    }
+}
+
 export const {Context, Provider} = createNotesContext(
     notesReducer,
-    {addNote, deleteNote },
+    {addNote, deleteNote,editNote },
     [{title:"This is a dummy title", description:"this is a dummy descrption", id:10000}]
 )
