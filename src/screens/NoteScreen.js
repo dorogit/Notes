@@ -1,22 +1,23 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import { Context } from "../context/NotesContext";
 import { Feather } from "@expo/vector-icons";
 
 const NoteScreen = ({ route,navigation }) => {
 
-  navigation.setOptions({
-    headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("Create")}>
-          <Feather size={18} name="edit" />
-        </TouchableOpacity>
-      )
-  })
-
   const { state } = useContext(Context)
   const { id } = route.params
-
   const Note = state.find((note) => note.id == id)
+
+  useEffect(()=> {
+    navigation.setOptions({
+      headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.navigate("Edit",{ id:id })}>
+            <Feather size={18} name="edit" />
+          </TouchableOpacity>
+        )
+    })
+  },[])
 
   return (
     <View>

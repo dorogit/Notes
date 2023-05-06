@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { View,Text,Button, StyleSheet } from "react-native"
 import { Context } from "../context/NotesContext";
 import { FlatList } from "react-native-gesture-handler";
@@ -7,13 +7,15 @@ import { TouchableOpacity } from 'react-native';
 
 const IndexScreen = ({ navigation }) => {
     
-    navigation.setOptions({
-        headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Edit")}>
-              <Feather style={styles.plusIcon} name="plus" />
-            </TouchableOpacity>
-          )
-    })
+    useEffect(()=> {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate("Edit")}>
+                  <Feather style={styles.plusIcon} name="plus" />
+                </TouchableOpacity>
+              )
+        })
+    }, [navigation])
 
     const {state, deleteNote} = useContext(Context)
     
