@@ -6,7 +6,7 @@ import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native';
 
 const IndexScreen = ({ navigation }) => {
-    
+    const {state,getNotes, deleteNote} = useContext(Context)
     useEffect(()=> {
         navigation.setOptions({
             headerRight: () => (
@@ -15,9 +15,13 @@ const IndexScreen = ({ navigation }) => {
                 </TouchableOpacity>
               )
         })
+        const listener = navigation.addListener('didFocus', () => {
+            getNotes()
+        })
+        return () => {
+            listener.remove()
+        }
     }, [navigation])
-
-    const {state, deleteNote} = useContext(Context)
     
     return (
         <View>
